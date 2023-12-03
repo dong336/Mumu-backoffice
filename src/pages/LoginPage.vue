@@ -1,31 +1,38 @@
 <template>
-	<div class="container p-5">
-		<p class="fs-4 text-center">관리자 로그인 페이지</p>
-		<form class="d-flex flex-column align-items-center">
-			<div class="form-floating mb-3 custom-input">
-				<input
-					type="email"
-					class="form-control custom-input"
-					id="floatingInput"
-					placeholder="ID"
-				/>
-				<label for="floatingInput">ID</label>
-			</div>
-			<div class="form-floating mb-3 custom-input">
-				<input
+	<v-container>
+		<v-sheet width="300" class="mx-auto">
+			<v-form fast-fail @submit.prevent>
+				<v-text-field label="ID" v-model="state.form.loginId"></v-text-field>
+
+				<v-text-field
 					type="password"
-					class="form-control custom-input"
-					id="floatingPassword"
-					placeholder="Password"
-				/>
-				<label for="floatingPassword">Password</label>
-			</div>
-			<button type="submit" class="btn btn-primary">로그인</button>
-		</form>
-	</div>
+					label="Password"
+					v-model="state.form.loginPw"
+				></v-text-field>
+
+				<v-btn @click="submit()" block class="mt-2">로그인</v-btn>
+			</v-form>
+		</v-sheet>
+	</v-container>
 </template>
 
-<script setup></script>
+<script setup>
+import { reactive } from 'vue';
+
+const state = reactive({
+	form: {
+		loginId: '',
+		loginPw: '',
+	},
+});
+
+const submit = () => {
+	// const body = {
+	// 	loginId: state.form.loginId,
+	// 	loginPw: state.form.loginPw,
+	// };
+};
+</script>
 
 <style scoped>
 form {

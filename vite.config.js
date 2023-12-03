@@ -14,4 +14,12 @@ export default defineConfig({
 	compilerOptions: {
 		isCustomElement: tag => tag.startsWith('v-'),
 	},
+	server: {
+		proxy: {
+			'/api': {
+				target: 'http://localhost:8080',
+				changeOrigin: true,
+			},
+		},
+	},
 });

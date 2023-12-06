@@ -1,16 +1,16 @@
 <template>
 	<v-container>
 		<v-sheet width="300" class="mx-auto">
-			<v-form fast-fail @submit.prevent>
-				<v-text-field label="ID" v-model="state.form.loginId"></v-text-field>
+			<v-form fast-fail @submit.prevent @keyup="onKeyUp">
+				<v-text-field label="ID" v-model="state.form.userId"></v-text-field>
 
 				<v-text-field
 					type="password"
 					label="Password"
-					v-model="state.form.loginPw"
+					v-model="state.form.userPw"
 				></v-text-field>
 
-				<v-btn @click="submit()" block class="mt-2">로그인</v-btn>
+				<v-btn v-on="{ click: login }" block class="mt-2">로그인</v-btn>
 			</v-form>
 		</v-sheet>
 	</v-container>
@@ -18,19 +18,38 @@
 
 <script setup>
 import { reactive } from 'vue';
+import { fetchPost } from '@/util/fetchUtil';
+
+const emits = defineEmits(['updateState']);
 
 const state = reactive({
 	form: {
-		loginId: '',
-		loginPw: '',
+		userId: '',
+		userPw: '',
 	},
 });
 
-const submit = () => {
-	// const body = {
-	// 	loginId: state.form.loginId,
-	// 	loginPw: state.form.loginPw,
-	// };
+const login = () => {
+	const form = {
+		username: state.form.userId,
+		password: state.form.userPw,
+	};
+
+	fetchPost('/api/auth/admin-login', form)
+		.then(body => {
+			if (body.code == 2000) {
+				emits('updateState', body.data);
+			}
+		})
+		.catch(e => {
+			console.log(e);
+		});
+};
+
+const onKeyUp = event => {
+	if (event.key.toLowerCase() === 'enter') {
+		login(); // 엔터 키 눌렀을 때 로그인 메서드 호출
+	}
 };
 </script>
 

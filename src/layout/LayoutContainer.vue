@@ -1,14 +1,14 @@
 <template>
 	<v-layout class="rounded rounded-md">
-		<GNB @toggle="updateDrawer"></GNB>
-		<LNB v-model="drawer"></LNB>
+		<GlobalNavBar @toggle="updateDrawer"></GlobalNavBar>
+		<LeftNavBar v-model="drawer"></LeftNavBar>
 		<MainContents></MainContents>
 	</v-layout>
 </template>
 
 <script setup>
-import GNB from '@/layout/GNB.vue';
-import LNB from '@/layout/LNB.vue';
+import GlobalNavBar from '@/layout/nav/GlobalNavBar.vue';
+import LeftNavBar from '@/layout/nav/LeftNavBar.vue';
 import MainContents from '@/layout/MainContents.vue';
 import { ref } from 'vue';
 

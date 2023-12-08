@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import App from '@/App.vue';
+import MainPage from '@/pages/MainPage.vue';
+import MembersPage from '@/pages/MembersPage.vue';
 
 const indexRoutes = [
 	{
 		path: '/',
-		name: 'App',
-		component: App,
+		name: 'MainPage',
+		component: MainPage,
+	},
+	{
+		path: '/members',
+		name: 'MembersPage',
+		component: MembersPage,
 	},
 ];
 

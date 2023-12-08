@@ -1,4 +1,4 @@
-<template><div></div></template>
+<template><v-icon icon="$vuetify"></v-icon> Main Content</template>
 
 <script setup></script>
 

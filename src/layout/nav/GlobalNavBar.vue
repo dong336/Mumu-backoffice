@@ -1,38 +1,39 @@
 <template>
 	<v-app-bar color="black">
-		<v-app-bar-nav-icon @click.stop="$emit('toggle')"
-			><v-icon icon="mdi-menu"></v-icon
-		></v-app-bar-nav-icon>
+		<v-app-bar-nav-icon @click.stop="$emit('toggle')">
+			<v-icon icon="mdi-menu"></v-icon>
+		</v-app-bar-nav-icon>
 
 		<v-toolbar-title class="ml-2">
-			<v-btn>
-				<RouterLink class="router-link-custom" active-class="active" to="/"
-					>Backoffice</RouterLink
-				>
-			</v-btn>
+			<v-btn
+				@click="handleMenuClick('MainPage')"
+				:class="{ active: currentMenu === 'MainPage' }"
+				>Backoffice</v-btn
+			>
 		</v-toolbar-title>
 
 		<v-app-bar-title>
 			<v-btn
-				><RouterLink
-					class="router-link-custom"
-					active-class="active"
-					to="/members"
-					>회원관리</RouterLink
-				></v-btn
+				@click="handleMenuClick('MembersIndexPage')"
+				:class="{ active: currentMenu === 'MembersIndexPage' }"
+				>회원관리</v-btn
 			>
 		</v-app-bar-title>
 
 		<v-app-bar-title>
-			<v-btn>...</v-btn>
+			<v-btn
+				@click="handleMenuClick('ExhibitIndexPage')"
+				:class="{ active: currentMenu === 'ExhibitIndexPage' }"
+				>전시관리</v-btn
+			>
 		</v-app-bar-title>
 
 		<v-app-bar-title>
-			<v-btn>...</v-btn>
-		</v-app-bar-title>
-
-		<v-app-bar-title>
-			<v-btn>...</v-btn>
+			<v-btn
+				@click="handleMenuClick('ProductIndexPage')"
+				:class="{ active: currentMenu === 'ProductIndexPage' }"
+				>상품관리</v-btn
+			>
 		</v-app-bar-title>
 
 		<v-btn icon>
@@ -44,13 +45,27 @@
 
 <script setup>
 import DropDownMember from '@/components/DropDownMember.vue';
+import { ref, watchEffect } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
+
+const handleMenuClick = name => {
+	router.push({ name });
+};
+
+const currentMenu = ref(route.name);
+
+// 라우트 변경감지
+watchEffect(() => {
+	currentMenu.value = route.name;
+});
 </script>
 
 <style scoped>
-/* RouterLink의 기본 스타일 무효화 */
-.router-link-custom {
-	text-decoration: none; /* 밑줄 제거 */
-	color: inherit; /* 기본 링크 색상 사용 */
-	cursor: pointer; /* 커서 모양 변경 (선택 사항) */
+.active {
+	font-weight: bold; /* 또는 다른 스타일을 원하는 대로 지정 */
+	color: gold; /* 활성화된 상태의 색상을 지정 */
 }
 </style>

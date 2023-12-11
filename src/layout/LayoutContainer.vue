@@ -1,15 +1,17 @@
 <template>
 	<v-layout class="rounded rounded-md">
 		<GlobalNavBar @toggle="updateDrawer"></GlobalNavBar>
-		<LeftNavBar v-model="drawer"></LeftNavBar>
-		<MainContents></MainContents>
+		<LocalNavBar v-model="drawer"></LocalNavBar>
+		<MainContents />
+		<ContentsFooter />
 	</v-layout>
 </template>
 
 <script setup>
 import GlobalNavBar from '@/layout/nav/GlobalNavBar.vue';
-import LeftNavBar from '@/layout/nav/LeftNavBar.vue';
+import LocalNavBar from '@/layout/nav/LocalNavBar.vue';
 import MainContents from '@/layout/MainContents.vue';
+import ContentsFooter from '@/layout/ContentsFooter.vue';
 import { ref } from 'vue';
 
 const drawer = ref(true);

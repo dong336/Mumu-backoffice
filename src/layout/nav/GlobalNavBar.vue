@@ -1,45 +1,35 @@
 <template>
-	<v-app-bar color="black">
+	<v-app-bar color="amber-lighten-3">
 		<v-app-bar-nav-icon @click.stop="$emit('toggle')">
 			<v-icon icon="mdi-menu"></v-icon>
 		</v-app-bar-nav-icon>
 
 		<v-toolbar-title class="ml-2">
-			<v-btn
-				@click="handleMenuClick('MainPage')"
-				:class="{ active: currentMenu === 'MainPage' }"
-				>Backoffice</v-btn
-			>
+			<v-btn @click="handleMenuClick('MainPage')">Backoffice</v-btn>
 		</v-toolbar-title>
-
-		<v-app-bar-title>
-			<v-btn
-				@click="handleMenuClick('MembersIndexPage')"
-				:class="{ active: currentMenu === 'MembersIndexPage' }"
-				>회원관리</v-btn
-			>
-		</v-app-bar-title>
-
-		<v-app-bar-title>
-			<v-btn
-				@click="handleMenuClick('ExhibitIndexPage')"
-				:class="{ active: currentMenu === 'ExhibitIndexPage' }"
-				>전시관리</v-btn
-			>
-		</v-app-bar-title>
-
-		<v-app-bar-title>
-			<v-btn
-				@click="handleMenuClick('ProductIndexPage')"
-				:class="{ active: currentMenu === 'ProductIndexPage' }"
-				>상품관리</v-btn
-			>
-		</v-app-bar-title>
 
 		<v-btn icon>
 			<v-icon>mdi-magnify</v-icon>
 		</v-btn>
 		<DropDownMember></DropDownMember>
+
+		<template v-slot:extension>
+			<div class="bg-amber-lighten-4">
+				<v-tabs>
+					<v-tab value="tab-1" @click="handleMenuClick('MembersIndexPage')"
+						>회원관리</v-tab
+					>
+
+					<v-tab value="tab-2" @click="handleMenuClick('ExhibitIndexPage')"
+						>전시관리</v-tab
+					>
+
+					<v-tab value="tab-3" @click="handleMenuClick('ProductIndexPage')"
+						>상품관리</v-tab
+					>
+				</v-tabs>
+			</div>
+		</template>
 	</v-app-bar>
 </template>
 
@@ -63,9 +53,4 @@ watchEffect(() => {
 });
 </script>
 
-<style scoped>
-.active {
-	font-weight: bold; /* 또는 다른 스타일을 원하는 대로 지정 */
-	color: gold; /* 활성화된 상태의 색상을 지정 */
-}
-</style>
+<style scoped></style>

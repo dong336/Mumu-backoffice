@@ -11,7 +11,7 @@
 
 			<v-list>
 				<v-list-item disabled>
-					<v-list-item-title class="text-center" title="Option 3"
+					<v-list-item-title class="text-center" title="Option1"
 						>{{ state.admin.name }} 님</v-list-item-title
 					>
 				</v-list-item>

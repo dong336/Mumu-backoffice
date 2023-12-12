@@ -1,12 +1,11 @@
 <template>
 	<v-navigation-drawer
-		v-model="drawer"
 		:disable-resize-watcher="true"
 		permanent
 		nav
 		color="amber-lighten-5"
 	>
-		<v-list v-model:opened="open">
+		<!-- <v-list v-model:opened="open">
 			<v-list-group value="Users">
 				<template v-slot:activator="{ data }">
 					<v-list-item
@@ -44,7 +43,7 @@
 					></v-list-item>
 				</v-list-group>
 			</v-list-group>
-		</v-list>
+		</v-list> -->
 	</v-navigation-drawer>
 </template>
 

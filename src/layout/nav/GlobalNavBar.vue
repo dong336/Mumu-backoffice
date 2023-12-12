@@ -15,16 +15,22 @@
 
 		<template v-slot:extension>
 			<div class="bg-amber-lighten-4">
-				<v-tabs>
-					<v-tab value="tab-1" @click="handleMenuClick('MembersIndexPage')"
+				<v-tabs v-model="selectedTab">
+					<v-tab
+						value="tab-1"
+						@click="handleMenuClick('MembersIndexPage', 'tab-1')"
 						>회원관리</v-tab
 					>
 
-					<v-tab value="tab-2" @click="handleMenuClick('ExhibitIndexPage')"
+					<v-tab
+						value="tab-2"
+						@click="handleMenuClick('ExhibitIndexPage', 'tab-2')"
 						>전시관리</v-tab
 					>
 
-					<v-tab value="tab-3" @click="handleMenuClick('ProductIndexPage')"
+					<v-tab
+						value="tab-3"
+						@click="handleMenuClick('ProductIndexPage', 'tab-3')"
 						>상품관리</v-tab
 					>
 				</v-tabs>
@@ -35,21 +41,29 @@
 
 <script setup>
 import DropDownMember from '@/components/DropDownMember.vue';
-import { ref, watchEffect } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
+const selectedTab = ref(null);
 
-const handleMenuClick = name => {
+const handleMenuClick = (name, selectedTab) => {
 	router.push({ name });
+	localStorage.setItem('selectedTab', selectedTab);
 };
 
 const currentMenu = ref(route.name);
 
-// 라우트 변경감지
 watchEffect(() => {
 	currentMenu.value = route.name;
+});
+
+onMounted(() => {
+	const storedTab = localStorage.getItem('selectedTab');
+	if (storedTab) {
+		selectedTab.value = storedTab;
+	}
 });
 </script>
 

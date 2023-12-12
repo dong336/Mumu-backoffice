@@ -14,7 +14,7 @@ import LayoutContainer from '@/layout/LayoutContainer.vue';
 
 const state = reactive({
 	admin: {
-		id: '',
+		id: null,
 		name: '',
 	},
 });
